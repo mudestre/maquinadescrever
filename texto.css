@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #212121;
+    color: white;
+}
+.txt-animado{
+    font-size: 45px;
+    font-weight: 300;
+
+}
+.txt-animado span{
+    position: relative;
+}
+.txt-animado span::before{
+    content: "";
+    color: #ff007b;
+    animation: palavras 20s  infinite; /* duração da keyframe palavras, e o tanto que ela vai retornar, nesse caso em loop*/
+}
+.txt-animado span::after{
+    content: "";
+    position: absolute;
+    height: 100%;
+    border-left: 2px solid #ff007b; /*criando a barra de apagar, barra vertical*/ 
+    right: -10px; /*distancia da barra das frases*/
+    animation: cursor .5s infinite, digita 20s steps(15) infinite; /* revele e esconde o texto no ritmo da keyframe, steps usando pra definir como a animação vai ser comportar, nesse caso sem transição*/
+    width: calc(100% + 30px); /*cursor passando por todas as palavras*/
+    background-color: #212121; /*tampar as palavras*/
+}
+@keyframes digita {
+     10%, 15%,30%, 35%, 50%, 55%, 70%, 75%, 90%, 95%{
+        width: 0; /*a barra ta no inicio, depois da palavra "você", então texto é visivel*/
+     }
+     5%, 20%, 25%, 40%, 45%, 60%, 65%, 80%, 85%{
+        width: calc(100% + 30px); /*a barra vai para o fim cobrindo toda a keyframe de palavras, "apagando ele"*/
+     }
+}
+/*animação do cursor piscando*/
+@keyframes cursor {
+    0%{
+        border-left: 2px solid #212121; /*acão para as palavras desaparecer*/
+    }
+}
+@keyframes palavras {
+    0%,20%{
+        content: "deixou o like?";
+    }
+    21%,40%{
+        content: "ativou o sininho?";
+    }
+    41%,60%{
+        content: "já comentou?";
+    }
+    61%,80%{
+        content: "já se increveu?";
+    }
+    81%,100%{
+        content: "já compartilhou?"; 
+    }
+}
+/*essa porcertagem é referente a como a animação vai se comportar apartir dali,
+  por exemplo, dentro de 0% a 20%, o content vai ser comportar assim "deixou o like?" e assim
+  em diante com as proximas porcentagens/*
